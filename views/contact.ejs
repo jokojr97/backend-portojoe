@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Daftar Kontak:</h2>
+            <a href="/addcontact" class="btn btn-primary btn-sm mt-2">Tambah Kontak</a>
+            <% if (msg.length>= 1) { %>
+                <div class="alert alert-success fw-bold mt-2" role="alert">
+                    Data Kontak berhasil di Tambahkan!
+                </div>
+                <% } %>
+                    <% if (msghps.length>= 1) { %>
+                        <div class="alert alert-danger fw-bold mt-2" role="alert">
+                            Data Kontak berhasil di Hapus!
+                        </div>
+                        <% } %>
+                            <table class="table table-bordered mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Nomor hp</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (contactList.length <1) { %>
+                                        <tr>
+                                            <td colspan="5">
+                                                <div class="alert alert-danger fw-bold" role="alert">
+                                                    Data Kontak masih kosong!
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% let i=1; %>
+                                                <% contactList.forEach(contact=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= i %>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/contact/<%= contact.nama %> ">
+                                                                <%= contact.nama %>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <%= contact.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= contact.nohp %>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="#" class="btn btn-success btn-sm"> Edit</a>
+                                                            <a href="/contact/delete/<%- contact.nama %>"
+                                                                class="btn btn-danger btn-sm"> Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                    <% i++ %>
+                                                        <% }) %>
+                                </tbody>
+
+                            </table>
+        </div>
+    </div>
+</div>

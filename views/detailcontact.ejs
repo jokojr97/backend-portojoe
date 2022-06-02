@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4 class="card-title mb-2">Detail Kontak: </h4>
+            <% if (!contact) { %>
+                <div class="alert alert-danger" role="alert">
+                    Data Kontak Tidak Ditemukan <a href="/contact">&laquo; kembali ke halaman kontak</a>
+                </div>
+                <% }else { %>
+                    <div class="card mt-2" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="m-0"> Nama: <%- contact.nama %>
+                            </p>
+                            <p class="m-0"> Email: <%- contact.email %>
+                            </p>
+                            <p class="m-0"> Nomor HP: <%- contact.nohp %>
+                            </p>
+                            <a href="/contact" class="btn btn-primary mt-2 btn-sm"> Back to Contact page</a>
+                        </div>
+                    </div>
+                    <% } %>
+
+        </div>
+    </div>
+</div>
