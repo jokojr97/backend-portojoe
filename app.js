@@ -58,55 +58,33 @@ const InsertData = (nama, nohp, email) => {
 }
 
 app.get('/', async (req, res) => {
-    const nama = 'joko riyadi';
-
-    // console.log(Portofolio);
-    const porto = Portofolio.find().then((portof) => {
+    Portofolio.find().then((portof) => {
         res.send(portof)
     });
-    // const mahasiswa = await Portofolio.find();
-    // console.log(mahasiswa)
-    const title = "Halaman Home";
-    const menu = "home";
-    const layout = 'layouts/mainLayout';
-    // res.render('index', { nama, mahasiswa, title, menu, title, layout });
-    // const title = "Halaman Home";
-    // const menu = "home";
-    // const layout = 'layouts/mainLayout';
-    // res.render('index', { nama, mahasiswa, title, menu, title, layout });
 });
 
 
-app.get('/contact', async (req, res) => {
-    const title = "Halaman Contact";
-    const menu = "contact";
-    const layout = 'layouts/mainLayout';
-    const contactList = await Contact.find();
-    const msg = req.flash('msg');
-    const msghps = req.flash('msghps');
-    console.log(msg.length);
-    res.render('contact', { title, menu, layout, contactList, msg, msghps });
+app.get('/portofolio/getdata', async (req, res) => {
+    Portofolio.find().then((portof) => {
+        res.send(portof)
+    });
 });
 
-
-app.post('/contact', async (req, res) => {
-    const hasil = req.body;
-    // res.send(hasil);
-    console.log(hasil);
-    await InsertData(hasil.name, hasil.nohp, hasil.email);
-    // await contacts.simpanContact(hasil.name, hasil.email, hasil.nohp);
-    // res.render('contact', { title, menu, layout, contactList });
-    req.flash('msg', 'Data Kontak Berhasil Ditambahkan');
-    res.redirect('/contact');
-});
-
-app.get('/addcontact', async (req, res) => {
-    const title = "Halaman Tambah Contact";
-    const menu = "contact";
-    const layout = 'layouts/mainLayout';
-    const contactList = await Contact.find();
-    // console.log(contactList);
-    res.render('addcontact', { title, menu, layout, contactList });
+app.get('/portofolio/insert', async (req, res) => {
+    const title = "judul 3 lorem ipsum dolor";
+    const description = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere optio blanditiis perferendis! Aperiam enim at excepturi optio iusto quaerat architecto perferendis quam labore atque modi sit, temporibus blanditiis cumque dolores.";
+    Portofolio.insertMany(
+        [
+            {
+                title: title,
+                description: description
+            }
+        ]
+    ).then(() => {
+        res.writeHead(301, {
+            Location: `/portofolio/getdata`
+        }).end();
+    });
 });
 
 
