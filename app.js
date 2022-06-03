@@ -32,31 +32,6 @@ app.use(urlencoded())
 app.use(express.static('public'));
 
 
-const InsertData = (nama, nohp, email) => {
-    return new Promise(async (resolve, reject) => {
-        console.log(nama);
-        const duplikat = await Portofolio.find({ nama: nama });
-        console.log(duplikat.length);
-
-        if (duplikat.length > 0) {
-            console.log("contact sudah terdaftar, gunakan nama lain!");
-            // return false;
-
-            throw new Error('Nama kontak Sudah Digunakan')
-        } else {
-            try {
-                resolve(Portofolio.insertMany({ nama, nohp, email }));
-            } catch (error) {
-
-                console.log("gagal input data!");
-                // return false;
-                throw new Error('Nama kontak Sudah Digunakan')
-            }
-        }
-
-    })
-}
-
 app.get('/', async (req, res) => {
     Portofolio.find().then((portof) => {
         res.send(portof)
