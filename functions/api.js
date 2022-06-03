@@ -1,14 +1,16 @@
 const express = require('express');
 const ServerlessHttp = require('serverless-http');
 
+// mongodb mongoose
+require('../utilities/db');
+const Portofolio = require('../model/portofolio');
+
 const app = express()
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.json({
-        'path': 'Home',
-        'firstname': 'Joko',
-        'lastname': 'Riyadi'
+    Portofolio.find().then((portof) => {
+        res.send(portof)
     });
 });
 
